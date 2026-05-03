@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마더클럽 | 우리 아이 독해력, 지금 확인하세요</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #1B3A2D;
+    --sage: #2D5A3D;
+    --mint: #4A9B6F;
+    --cream: #FAF7F2;
+    --warm: #F5EFE6;
+    --gold: #C8964A;
+    --gold-light: #E8B96A;
+    --text-dark: #1A1A1A;
+    --text-mid: #4A4A4A;
+    --text-light: #7A7A7A;
+    --red-soft: #C0392B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    line-height: 1.7;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--forest);
+    color: #fff;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+  .topbar strong { color: var(--gold-light); }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, var(--forest) 0%, var(--sage) 60%, #3a7a52 100%);
+    color: #fff;
+    padding: 70px 20px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(200,150,74,0.08);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(200,150,74,0.25);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    font-size: 12px;
+    padding: 5px 16px;
+    border-radius: 20px;
+    letter-spacing: 1.5px;
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(26px, 6vw, 42px);
+    font-weight: 900;
+    line-height: 1.35;
+    margin-bottom: 20px;
+  }
+  .hero h1 em {
+    color: var(--gold-light);
+    font-style: normal;
+    display: block;
+  }
+  .hero-sub {
+    font-size: clamp(14px, 3.5vw, 17px);
+    opacity: 0.85;
+    max-width: 520px;
+    margin: 0 auto 36px;
+    font-weight: 300;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: var(--gold);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 8px 30px rgba(200,150,74,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+  .hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 36px rgba(200,150,74,0.5);
+  }
+  .hero-note {
+    font-size: 12px;
+    opacity: 0.6;
+    margin-top: 14px;
+  }
+
+  /* ── STATS ── */
+  .stats {
+    background: #fff;
+    padding: 50px 20px;
+    border-bottom: 1px solid #eee;
+  }
+  .stats-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .stats-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 18px;
+    color: var(--text-mid);
+    margin-bottom: 36px;
+  }
+  .stats-title strong { color: var(--forest); }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  @media(min-width: 560px) {
+    .stats-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .stat-item {
+    background: var(--warm);
+    border-radius: 14px;
+    padding: 22px 12px;
+    border-left: 3px solid var(--mint);
+  }
+  .stat-num {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--forest);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-num span { font-size: 16px; }
+  .stat-label { font-size: 12px; color: var(--text-light); line-height: 1.4; }
+
+  /* ── PROBLEM ── */
+  .problem {
+    padding: 60px 20px;
+    background: var(--warm);
+  }
+  .section-inner { max-width: 680px; margin: 0 auto; }
+  .section-tag {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--mint);
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(20px, 5vw, 28px);
+    font-weight: 700;
+    line-height: 1.45;
+    margin-bottom: 30px;
+    color: var(--forest);
+  }
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #fff;
+    padding: 16px 18px;
+    border-radius: 10px;
+    font-size: 15px;
+    color: var(--text-mid);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .checklist li::before {
+    content: '✗';
+    color: var(--red-soft);
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .problem-note {
+    margin-top: 28px;
+    padding: 20px;
+    background: var(--forest);
+    color: #fff;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .problem-note strong { color: var(--gold-light); }
+
+  /* ── SOLUTION ── */
+  .solution {
+    padding: 60px 20px;
+    background: #fff;
+  }
+  .solution-box {
+    background: linear-gradient(135deg, var(--forest), var(--sage));
+    color: #fff;
+    border-radius: 18px;
+    padding: 40px 30px;
+    margin-bottom: 36px;
+    text-align: center;
+  }
+  .solution-box h3 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+  .solution-box p { font-size: 14px; opacity: 0.85; line-height: 1.8; }
+  .feature-list { display: flex; flex-direction: column; gap: 16px; }
+  .feature-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 18px;
+    background: var(--warm);
+    border-radius: 12px;
+  }
+  .feature-icon {
+    width: 44px; height: 44px;
+    background: var(--forest);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .feature-text h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--forest);
+    margin-bottom: 4px;
+  }
+  .feature-text p { font-size: 13px; color: var(--text-light); }
+
+  /* ── TQ TEST ── */
+  .tq-section {
+    padding: 60px 20px;
+    background: var(--warm);
+  }
+  .tq-card {
+    background: linear-gradient(135deg, #fff 0%, var(--cream) 100%);
+    border: 2px solid var(--gold);
+    border-radius: 18px;
+    padding: 36px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .tq-badge {
+    position: absolute;
+    top: -1px; right: 20px;
+    background: var(--gold);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 0 0 10px 10px;
+    letter-spacing: 1px;
+  }
+  .tq-price-old {
+    font-size: 15px;
+    color: var(--text-light);
+    text-decoration: line-through;
+    margin-bottom: 4px;
+  }
+  .tq-price-new {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--forest);
+    margin-bottom: 8px;
+  }
+  .tq-price-new span { font-size: 18px; }
+  .tq-desc {
+    font-size: 13px;
+    color: var(--text-mid);
+    margin-bottom: 24px;
+    line-height: 1.7;
+  }
+  .tq-items {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .tq-items li {
+    font-size: 14px;
+    padding-left: 24px;
+    position: relative;
+    color: var(--text-mid);
+  }
+  .tq-items li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--mint);
+    font-weight: 700;
+  }
+
+  /* ── FORM ── */
+  .form-section {
+    padding: 60px 20px;
+    background: var(--forest);
+    color: #fff;
+  }
+  .form-section .section-tag { color: var(--gold-light); }
+  .form-section .section-title { color: #fff; }
+  .form-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 18px;
+    padding: 36px 28px;
+    backdrop-filter: blur(10px);
+  }
+  .form-group { margin-bottom: 18px; }
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    opacity: 0.85;
+  }
+  .form-group label span { color: var(--gold-light); }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-size: 15px;
+    color: #fff;
+    font-family: 'Noto Sans KR', sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { opacity: 0.45; }
+  .form-group input:focus,
+  .form-group select:focus { border-color: var(--gold); }
+  .form-group select option { background: var(--forest); color: #fff; }
+  .form-group textarea { height: 90px; resize: none; }
+  .consent-box {
+    background: rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 22px;
+  }
+  .consent-box p { font-size: 12px; opacity: 0.65; line-height: 1.7; margin-bottom: 12px; }
+  .consent-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .consent-check input[type="checkbox"] {
+    width: 18px; height: 18px;
+    accent-color: var(--gold);
+    cursor: pointer;
+  }
+  .submit-btn {
+    width: 100%;
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 17px;
+    font-size: 17px;
+    font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    box-shadow: 0 8px 28px rgba(200,150,74,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 36px rgba(200,150,74,0.5);
+  }
+  .form-bottom-note {
+    font-size: 12px;
+    opacity: 0.5;
+    text-align: center;
+    margin-top: 14px;
+  }
+
+  /* ── TRUST ── */
+  .trust {
+    padding: 50px 20px;
+    background: #fff;
+    text-align: center;
+  }
+  .trust-title {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 28px;
+    letter-spacing: 1px;
+  }
+  .trust-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+  .trust-item {
+    background: var(--warm);
+    border-radius: 50px;
+    padding: 10px 22px;
+    font-size: 13px;
+    color: var(--text-mid);
+    font-weight: 500;
+  }
+  .trust-item strong { color: var(--forest); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--text-dark);
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+    padding: 28px 20px;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  /* ── FLOATING CTA ── */
+  .float-cta {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 14px 36px;
+    border-radius: 50px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    cursor: pointer;
+    border: none;
+    font-family: 'Noto Sans KR', sans-serif;
+    white-space: nowrap;
+    z-index: 100;
+    transition: transform 0.2s;
+    display: none;
+  }
+  .float-cta:hover { transform: translateX(-50%) translateY(-2px); }
+  @media(max-width: 680px) { .float-cta { display: block; } }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-box {
+    background: var(--forest);
+    color: #fff;
+    border-radius: 20px;
+    padding: 36px 28px;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+  }
+  .modal-box h3 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: var(--gold-light);
+  }
+  .modal-box p { font-size: 14px; opacity: 0.8; margin-bottom: 24px; }
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 20px;
+    background: none; border: none;
+    color: #fff; font-size: 22px;
+    cursor: pointer; opacity: 0.6;
+  }
+  .modal-box.success { position: relative; }
+
+  /* SCROLL ANIMATION */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  📚 <strong>5월 한정</strong> — TQ 독해력 진단 테스트 (10만원 상당) 무료 제공 중
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">마더클럽 × 스터디포스</div>
+  <h1>
+    열심히 공부하는데<br>
+    <em>왜 성적이 오르지 않을까요?</em>
+  </h1>
+  <p class="hero-sub">
+    열심히 읽는데 이해를 못 한다면,<br>
+    독서가 아니라 <strong style="color:var(--gold-light)">독해</strong>가 문제입니다.<br>
+    국어, 수학, 영어, 사회, 과학 —<br>
+    모든 과목의 공통점은 <strong style="color:var(--gold-light)">글을 읽고 이해하는 것</strong>입니다.
+  </p>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSenH9nbX9WfeorLxerm_UEaKZ6F1geTMkzwjd2pdna17y-0Ug/viewform" target="_blank" rel="noopener" class="hero-cta">
+    무료 상담 신청하기 →
+  </a>
+  <p class="hero-note">* 상담 후 TQ 진단 테스트 무료 진행</p>
+</section>
+
+<!-- STATS -->
+<section class="stats fade-up">
+  <div class="stats-inner">
+    <p class="stats-title"><strong>독해력이 오르면, 모든 과목이 달라집니다</strong></p>
+    <div style="display:flex; flex-direction:column; gap:16px; text-align:left;">
+      <div style="background:var(--warm); border-radius:14px; padding:20px 22px; border-left:3px solid var(--mint);">
+        <p style="font-size:15px; color:var(--forest); font-weight:700; margin-bottom:6px;">열심히 읽는데 이해를 못 한다면</p>
+        <p style="font-size:13px; color:var(--text-light); line-height:1.7;">독서량의 문제가 아닙니다. 독해력은 읽는 양이 아니라 <strong style="color:var(--text-mid)">훈련된 방식</strong>으로 만들어집니다.</p>
+      </div>
+      <div style="background:var(--warm); border-radius:14px; padding:20px 22px; border-left:3px solid var(--mint);">
+        <p style="font-size:15px; color:var(--forest); font-weight:700; margin-bottom:6px;">국어, 수학, 영어, 사회, 과학</p>
+        <p style="font-size:13px; color:var(--text-light); line-height:1.7;">모든 과목의 공통점은 하나입니다. <strong style="color:var(--text-mid)">글을 읽고 이해해야 한다</strong>는 것. 독해력은 모든 과목의 기초입니다.</p>
+      </div>
+      <div style="background:var(--warm); border-radius:14px; padding:20px 22px; border-left:3px solid var(--mint);">
+        <p style="font-size:15px; color:var(--forest); font-weight:700; margin-bottom:6px;">독해력이 오르면, 모든 과목이 달라집니다</p>
+        <p style="font-size:13px; color:var(--text-light); line-height:1.7;">한 가지를 훈련했는데 전 과목이 달라지는 경험. 그것이 마더클럽 아이들이 실제로 겪는 변화입니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem fade-up">
+  <div class="section-inner">
+    <p class="section-tag">문제 인식</p>
+    <h2 class="section-title">혹시 우리 아이,<br>이런 모습 아닌가요?</h2>
+    <ul class="checklist">
+      <li>문제를 읽어도 무슨 말인지 모른다고 합니다</li>
+      <li>긴 지문이 나오면 포기부터 합니다</li>
+      <li>학원을 다니는데도 성적이 제자리입니다</li>
+      <li>수학 서술형 문제에서 유독 실수가 많습니다</li>
+      <li>읽는 속도가 느려 시험 시간이 부족합니다</li>
+    </ul>
+    <div class="problem-note">
+      이것은 <strong>노력이 부족해서가 아닙니다.</strong><br>
+      독서와 독해는 다릅니다. 독해력은 훈련으로 향상됩니다.<br>
+      그 방법을 아는 사람이 아직 많지 않을 뿐입니다.
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="solution fade-up">
+  <div class="section-inner">
+    <p class="section-tag">마더클럽 소개</p>
+    <h2 class="section-title">독해력, 훈련하면<br>반드시 올라갑니다</h2>
+    <div class="solution-box">
+      <h3>마더클럽은<br>독해력 훈련 전문 교육 커뮤니티입니다</h3>
+      <p>
+        스터디포스의 독해력 훈련 프로그램을<br>
+        집에서 자유롭게 이용할 수 있도록 설계된<br>
+        엄마와 아이가 함께하는 독해력 훈련 전문 커뮤니티입니다
+      </p>
+    </div>
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-icon">📊</div>
+        <div class="feature-text">
+          <h4>정밀한 진단 — TQ 테스트</h4>
+          <p>어휘력, 작업기억, 추론력, 글 읽는 습관 등을 정확한 데이터로 진단합니다. 숫자로 정확히 확인할 수 있습니다.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">💻</div>
+        <div class="feature-text">
+          <h4>집에서 자유롭게 — 온라인 훈련 프로그램</h4>
+          <p>국어독해포스 · 영어독해포스 · 수리포스, 3가지 과목별 프로그램을 시간과 장소에 구애받지 않고 가정에서 진행할 수 있습니다.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-text">
+          <h4>1:1 맞춤 훈련 설계</h4>
+          <p>진단 결과에 따라 우리 아이에게 맞는 훈련 방향을 설계합니다. 모든 아이의 출발점이 다릅니다.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">👩‍👧</div>
+        <div class="feature-text">
+          <h4>엄마와 함께하는 교육</h4>
+          <p>아이만 가르치는 것이 아닙니다. 엄마가 함께 이해하고 가정에서 이어갈 수 있도록 안내합니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TQ TEST -->
+<section class="tq-section fade-up">
+  <div class="section-inner">
+    <p class="section-tag">무료 혜택</p>
+    <h2 class="section-title">상담 신청 시<br>TQ 테스트를 무료로 드립니다</h2>
+    <div class="tq-card">
+      <div class="tq-badge">LIMITED</div>
+      <p class="tq-price-old">정가 100,000원</p>
+      <p class="tq-price-new">무 <span>료</span></p>
+      <p class="tq-desc">
+        상담 신청 후 진행되는 1:1 전화 상담에서<br>
+        TQ 독해력 진단 테스트 링크를 무료로 제공해드립니다
+      </p>
+      <ul class="tq-items">
+        <li>어휘력, 작업기억, 추론력, 글 읽는 습관 등을 정확한 데이터로 진단</li>
+        <li>우리 아이 독해력 수준 수치로 정확하게 확인</li>
+        <li>결과에 따른 맞춤 훈련 방향 안내</li>
+        <li>상담 후 부담 없이 결정하셔도 됩니다</li>
+      </ul>
+      <button class="hero-cta" onclick="scrollToForm()" style="font-size:15px; padding: 14px 36px;">
+        무료 상담 신청하기 →
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="form-section" id="form-section">
+  <div class="section-inner">
+    <p class="section-tag">무료 상담 신청</p>
+    <h2 class="section-title" style="color:#fff; margin-bottom:8px;">지금 신청하시면<br>48시간 내 연락드립니다</h2>
+    <p style="font-size:14px; opacity:0.65; margin-bottom:32px;">부담 없이 신청해주세요. 상담 후 결정하셔도 됩니다.</p>
+
+    <div style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.15); border-radius:18px; padding:36px 28px; text-align:center;">
+
+      <!-- 안내 항목 -->
+      <ul style="list-style:none; text-align:left; margin-bottom:32px; display:flex; flex-direction:column; gap:12px;">
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:14px; opacity:0.85;">
+          <span style="color:var(--gold-light); font-weight:700; flex-shrink:0;">01</span>
+          아래 버튼을 눌러 신청서를 작성해주세요 (2분 소요)
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:14px; opacity:0.85;">
+          <span style="color:var(--gold-light); font-weight:700; flex-shrink:0;">02</span>
+          영업일 기준 1~2일 내 담당자가 연락드립니다
+        </li>
+        <li style="display:flex; align-items:flex-start; gap:10px; font-size:14px; opacity:0.85;">
+          <span style="color:var(--gold-light); font-weight:700; flex-shrink:0;">03</span>
+          1:1 전화 상담 후 TQ 진단 테스트 무료 링크 제공
+        </li>
+      </ul>
+
+      <!-- CTA 버튼 -->
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSenH9nbX9WfeorLxerm_UEaKZ6F1geTMkzwjd2pdna17y-0Ug/viewform"
+        target="_blank"
+        rel="noopener"
+        style="display:block; background:var(--gold); color:#fff; font-size:17px; font-weight:700; padding:18px 20px; border-radius:50px; text-decoration:none; box-shadow:0 8px 28px rgba(200,150,74,0.4); transition:transform 0.2s; font-family:'Noto Sans KR',sans-serif;"
+        onmouseover="this.style.transform='translateY(-2px)'"
+        onmouseout="this.style.transform='translateY(0)'"
+      >
+        📝 무료 상담 신청서 작성하기 →
+      </a>
+
+      <p style="font-size:12px; opacity:0.4; margin-top:16px;">
+        새 창으로 열립니다 · 작성 시간 약 2분 · 개인정보는 상담 목적으로만 사용됩니다
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust fade-up">
+  <p class="trust-title">마더클럽이 선택받는 이유</p>
+  <div class="trust-items">
+    <div class="trust-item">언어과학연구소 <strong>20년</strong> 노하우</div>
+    <div class="trust-item">독해력 향상된 <strong>수많은 사례</strong></div>
+    <div class="trust-item">1:1 <strong>맞춤</strong> 상담</div>
+    <div class="trust-item">집에서 하는 <strong>온라인</strong> 훈련</div>
+    <div class="trust-item">TQ 테스트 <strong>무료</strong> 제공</div>
+    <div class="trust-item">부담 없는 <strong>사후 결정</strong></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>마더클럽 | 스터디포스 공식 파트너</p>
+  <p style="margin-top:6px">문의: motherclub456@gmail.com</p>
+  <p style="margin-top:10px; font-size:11px">본 페이지에서 수집된 개인정보는 상담 목적으로만 사용되며, 관련 법령에 따라 안전하게 관리됩니다.</p>
+</footer>
+
+<!-- FLOATING CTA -->
+<button class="float-cta" onclick="scrollToForm()">
+  무료 상담 신청 →
+</button>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal-box success">
+    <h3>✅ 신청 완료!</h3>
+    <p>
+      소중한 신청 감사드립니다.<br>
+      영업일 기준 1~2일 내로 연락드리겠습니다.<br><br>
+      상담 시 TQ 테스트 무료 링크를<br>함께 안내해드립니다.
+    </p>
+    <button class="hero-cta" onclick="closeModal()" style="font-size:14px; padding:12px 32px;">
+      확인
+    </button>
+  </div>
+</div>
+
+<script>
+  // Scroll to form
+  function scrollToForm() {
+    document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('successModal').classList.add('active');
+    e.target.reset();
+  }
+
+  function closeModal() {
+    document.getElementById('successModal').classList.remove('active');
+  }
+
+  // Fade-up on scroll
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Close modal on overlay click
+  document.getElementById('successModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+</script>
+</body>
+</html>
